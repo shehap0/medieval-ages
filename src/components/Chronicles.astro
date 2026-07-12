@@ -1,0 +1,55 @@
+---
+const chronicles = [
+  {
+    date: 'XII · Mar',
+    year: 'MCDXIV',
+    title: 'The Road of No Banners',
+    body: 'A lone oath can outlive a kingdom when it is carried without heralds, songs, or witnesses. We hold three such oaths in the cabinet, and we have never opened them; the seal is the signature.',
+    pull: '"Signed, sealed, and not opened since the year it was made."'
+  },
+  {
+    date: 'IV · Aug',
+    year: 'MCDXII',
+    title: 'Ash Over Blackstone Gate',
+    body: 'When the beacon turned red, the gatehouse learned the old lesson. Stone remembers fire. We entered the ash the morning after, weighed the silver, and recorded the rest in a column marked only with the day\'s numeral.',
+    pull: null
+  },
+  {
+    date: 'XXIX · Oct',
+    year: 'MCDX',
+    title: 'The Last Bell at Dawn',
+    body: 'No minstrel sang for the rearguard, but every child inside the walls woke alive. The bell-tower ledger for that quarter has a single entry, written larger than the rest. The entry does not name the rearguard. It names the children.'
+  }
+];
+---
+
+<section class="chronicles section" id="chronicles" aria-labelledby="chronicles-title">
+  <div class="container">
+    <header class="section__head">
+      <div>
+        <h2 id="chronicles-title" class="section__title">
+          Three entries from the chronicle.
+        </h2>
+      </div>
+      <p class="section__lede">
+        Filed in <em>vellum</em> &middot; one volume per reign &middot; signed at the close of every page.
+      </p>
+    </header>
+
+    <div class="chronicles__layout">
+      {chronicles.map((c) => (
+        <article class="chronicle">
+          <div class="chronicle__date">
+            {c.date}
+            <small>{c.year}</small>
+          </div>
+          <div class="chronicle__body">
+            <h3>{c.title}</h3>
+            <p>{c.body}</p>
+            {c.pull && <blockquote class="chronicle__pull">{c.pull}</blockquote>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

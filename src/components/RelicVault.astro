@@ -1,0 +1,64 @@
+---
+const relics = [
+  {
+    img: '/images/map.jpg',
+    name: 'The Customs Map',
+    cat: 'Cartograph',
+    cls: 'relic--lead',
+    alt: 'A worn hand-drawn customs map of the upper bay, with pinprick marks and a wax seal at the corner.'
+  },
+  {
+    img: '/images/fire.jpg',
+    name: 'The Ember Effigy',
+    cat: 'Effigy',
+    cls: 'relic--a',
+    alt: 'A golden-armored knight with a flaming sword, set against a field of burning crosses and lavender.'
+  },
+  {
+    img: '/images/seclution.jpg',
+    name: 'The Veiled Reliquary',
+    cat: 'Effigy',
+    cls: 'relic--b',
+    alt: 'A solitary figure seated in quiet seclusion, kept under glass.'
+  },
+  {
+    img: '/images/old.jpg',
+    name: 'The Watchman\'s Cloak',
+    cat: 'Vestment',
+    cls: 'relic--c',
+    alt: 'A stained-glass effigy of the watchman, lit from behind by a low window.'
+  },
+  {
+    img: '/images/fallen2.jpg',
+    name: 'The Last Bell',
+    cat: 'Effigy',
+    cls: 'relic--d',
+    alt: 'A fallen knight resting beneath a dim sky, the bell at his hand.'
+  }
+];
+---
+
+<section class="relics section" id="relics" aria-labelledby="relics-title">
+  <div class="container">
+    <header class="section__head">
+      <div>
+        <h2 id="relics-title" class="section__title">The relic vault.</h2>
+      </div>
+      <p class="section__lede">
+        Each piece is a <em>sealed witness</em> from a border, a chapel, a battle, or a name that nearly vanished.
+      </p>
+    </header>
+
+    <div class="relics__bento">
+      {relics.map((r) => (
+        <figure class={`relic ${r.cls}`}>
+          <img src={r.img} alt={r.alt} loading="lazy" decoding="async" />
+          <figcaption class="relic__label">
+            <h3>{r.name}</h3>
+            <small>{r.cat}</small>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

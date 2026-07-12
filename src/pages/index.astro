@@ -1,0 +1,38 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import SiteHeader from '~/components/SiteHeader.astro';
+import Hero from '~/components/Hero.astro';
+import Chronicles from '~/components/Chronicles.astro';
+import RelicVault from '~/components/RelicVault.astro';
+import Orders from '~/components/Orders.astro';
+import InnerCircle from '~/components/InnerCircle.astro';
+import SealedCorrespondence from '~/components/SealedCorrespondence.astro';
+import GuildTrades from '~/components/GuildTrades.astro';
+import SiteFooter from '~/components/SiteFooter.astro';
+import AmbientParticles from '~/components/AmbientParticles.astro';
+import CustomCursor from '~/components/CustomCursor.astro';
+import BackgroundAudio from '~/components/BackgroundAudio.astro';
+import SectionFire from '~/components/SectionFire.astro';
+---
+
+<BaseLayout>
+  <AmbientParticles />
+  <CustomCursor />
+  <BackgroundAudio />
+  <SectionFire />
+  <SiteHeader />
+  <main id="main">
+    <Hero />
+    <Chronicles />
+    <RelicVault />
+    <Orders />
+    <InnerCircle />
+    <SealedCorrespondence />
+    <GuildTrades />
+  </main>
+  <SiteFooter />
+
+  <!-- Three.js for the hero astrolabe scene. Deferred so it never blocks paint. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="/scripts/realm-scene.js" defer></script>
+</BaseLayout>

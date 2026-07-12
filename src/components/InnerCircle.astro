@@ -1,0 +1,67 @@
+---
+const lead = {
+  img: '/images/fire.jpg',
+  name: 'Baldwin The Veiled',
+  role: 'Keeper of the Crown',
+  body: 'Speaks softly, signs rarely, and turns impossible sieges into patient victories. He has held the inner cabinet for twenty-one years. He has not opened the south window in nineteen.',
+  alt: 'A veiled knight in golden armor, sword drawn, in a field of burning crosses and cobalt lavender.'
+};
+
+const subs = [
+  {
+    img: '/images/standing.jpg',
+    name: 'Alexander Ashborne',
+    role: 'Marshal of Roads',
+    body: 'Moves armies by bridges, grain, and timing before a sword leaves its scabbard.'
+  },
+  {
+    img: '/images/old.jpg',
+    name: 'Aleks The Gold-Tongued',
+    role: 'Voice of the Court',
+    body: 'Turns rival houses into temporary allies when war would cost too much blood.'
+  },
+  {
+    img: '/images/fallen.jpg',
+    name: 'Ser Rowan Vale',
+    role: 'Silent Captain',
+    body: 'Commands the final watch. Asks for no song when the torches burn low.'
+  }
+];
+---
+
+<section class="council section" id="council" aria-labelledby="council-title">
+  <div class="container">
+    <header class="section__head">
+      <div>
+        <h2 id="council-title" class="section__title">The inner circle.</h2>
+      </div>
+      <p class="section__lede">
+        A throne is only as steady as the hands around it &middot; these are the names trusted with the keys, the maps, and the last words.
+      </p>
+    </header>
+
+    <div class="council__layout">
+      <figure class="council__lead">
+        <img src={lead.img} alt={lead.alt} loading="lazy" decoding="async" />
+        <figcaption class="council__lead-info">
+          <small>{lead.role}</small>
+          <h3>{lead.name}</h3>
+          <p>{lead.body}</p>
+        </figcaption>
+      </figure>
+
+      <div>
+        {subs.map((s) => (
+          <div class="council__sub">
+            <img src={s.img} alt={`${s.name}, ${s.role}`} loading="lazy" decoding="async" />
+            <div class="council__sub-info">
+              <small>{s.role}</small>
+              <h4>{s.name}</h4>
+              <p>{s.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,542 @@
+---
+import { letters } from '../data/letters';
+---
+
+<section class="correspondence section" id="correspondence" aria-labelledby="correspondence-title">
+  <img
+    class="corr-pillar corr-pillar--left"
+    src="/images/left longer pillar v3.png"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    decoding="async"
+  />
+  <img
+    class="corr-pillar corr-pillar--right"
+    src="/images/right longer pillar v3.png"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="container">
+    <header class="section__head">
+      <div>
+        <h2 id="correspondence-title" class="section__title">Sealed correspondence.</h2>
+      </div>
+      <p class="section__lede">
+        Private letters recovered from the inner circle &middot; <em>broken seals</em> &middot; opened by warrant
+      </p>
+    </header>
+
+    <div class="corr-grid">
+      {letters.map((letter) => (
+          <button
+            class="corr-seal"
+            data-letter={letter.id}
+            aria-label={`Open private letter from ${letter.author}`}
+          >
+            <svg
+              class="corr-seal__svg"
+              viewBox="0 0 120 120"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <clipPath id="seal-clip">
+                  <circle cx="60" cy="60" r="44" />
+                </clipPath>
+                <clipPath id="shard-1">
+                  <path d="M 60 60 L 60 16 A 44 44 0 0 1 104 60 Z" />
+                </clipPath>
+                <clipPath id="shard-2">
+                  <path d="M 60 60 L 104 60 A 44 44 0 0 1 60 104 Z" />
+                </clipPath>
+                <clipPath id="shard-3">
+                  <path d="M 60 60 L 60 104 A 44 44 0 0 1 16 60 Z" />
+                </clipPath>
+                <clipPath id="shard-4">
+                  <path d="M 60 60 L 16 60 A 44 44 0 0 1 60 16 Z" />
+                </clipPath>
+              </defs>
+              <circle
+                cx="60"
+                cy="60"
+                r="50"
+                fill="none"
+                stroke="oklch(0.55 0.075 78 / 0.45)"
+                stroke-width="1"
+              />
+              <circle
+                cx="60"
+                cy="60"
+                r="46"
+                fill="none"
+                stroke="oklch(0.55 0.075 78 / 0.25)"
+                stroke-width="0.5"
+              />
+
+              <image
+                class="seal-wax"
+                href={letter.image}
+                x="16"
+                y="16"
+                width="88"
+                height="88"
+                preserveAspectRatio="xMidYMid slice"
+                clip-path="url(#seal-clip)"
+              />
+
+              <image
+                class="seal-shard"
+                href={letter.image}
+                x="16"
+                y="16"
+                width="88"
+                height="88"
+                preserveAspectRatio="xMidYMid slice"
+                clip-path="url(#shard-1)"
+              />
+              <image
+                class="seal-shard"
+                href={letter.image}
+                x="16"
+                y="16"
+                width="88"
+                height="88"
+                preserveAspectRatio="xMidYMid slice"
+                clip-path="url(#shard-2)"
+              />
+              <image
+                class="seal-shard"
+                href={letter.image}
+                x="16"
+                y="16"
+                width="88"
+                height="88"
+                preserveAspectRatio="xMidYMid slice"
+                clip-path="url(#shard-3)"
+              />
+              <image
+                class="seal-shard"
+                href={letter.image}
+                x="16"
+                y="16"
+                width="88"
+                height="88"
+                preserveAspectRatio="xMidYMid slice"
+                clip-path="url(#shard-4)"
+              />
+
+              <path
+                class="seal-crack"
+                d="M 60 18 L 57 26 L 62 34 L 55 44 L 60 54 L 58 57 L 60 60"
+                fill="none"
+                stroke="oklch(0.06 0.01 240)"
+                stroke-width="0.8"
+                stroke-linecap="round"
+              />
+              <path
+                class="seal-crack"
+                d="M 102 60 L 94 57 L 86 63 L 78 58 L 70 62 L 65 57 L 60 60"
+                fill="none"
+                stroke="oklch(0.06 0.01 240)"
+                stroke-width="0.8"
+                stroke-linecap="round"
+              />
+              <path
+                class="seal-crack"
+                d="M 60 102 L 57 94 L 63 86 L 55 76 L 61 68 L 58 63 L 60 60"
+                fill="none"
+                stroke="oklch(0.06 0.01 240)"
+                stroke-width="0.8"
+                stroke-linecap="round"
+              />
+              <path
+                class="seal-crack"
+                d="M 18 60 L 26 57 L 34 63 L 42 58 L 50 62 L 54 57 L 60 60"
+                fill="none"
+                stroke="oklch(0.06 0.01 240)"
+                stroke-width="0.8"
+                stroke-linecap="round"
+              />
+
+              <circle
+                cx="60"
+                cy="60"
+                r="30"
+                fill="none"
+                stroke="oklch(0.20 0.02 240 / 0.4)"
+                stroke-width="0.5"
+              />
+            </svg>
+            <span class="corr-seal__label">{letter.author}</span>
+          </button>
+        ))}
+
+    </div>
+  </div>
+
+  <div class="corr-overlay" id="corr-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="corr-backdrop"></div>
+    <div class="corr-parchment">
+      <div class="corr-parchment__inner">
+        <p class="corr-plate-label ledger"></p>
+        <p class="corr-date-line ledger"></p>
+        <h3 class="corr-title" id="corr-title"></h3>
+        <div class="corr-body"></div>
+        <div class="corr-stain" aria-hidden="true"></div>
+      </div>
+      <button class="corr-close" aria-label="Close letter">
+        <svg
+          class="corr-close__icon"
+          viewBox="0 0 32 32"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <circle cx="16" cy="16" r="14" fill="var(--ember)" />
+          <circle
+            cx="16"
+            cy="16"
+            r="12"
+            fill="none"
+            stroke="oklch(0.25 0.1 28)"
+            stroke-width="0.5"
+          />
+          <line
+            x1="10"
+            y1="10"
+            x2="22"
+            y2="22"
+            stroke="oklch(0.90 0.02 70)"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+          <line
+            x1="22"
+            y1="10"
+            x2="10"
+            y2="22"
+            stroke="oklch(0.90 0.02 70)"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initSealedCorrespondence } from '../scripts/sealed-correspondence';
+  initSealedCorrespondence();
+</script>
+
+<style>
+  .corr-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-5);
+    justify-items: center;
+    animation: archive-rise 820ms var(--ease-out-expo) both;
+    animation-delay: 100ms;
+  }
+
+  .corr-seal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-3);
+    width: 100%;
+    max-width: 160px;
+    cursor: pointer;
+    transition: transform 200ms var(--ease-out-quart);
+    transform-origin: center center;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--parchment-2);
+    font: inherit;
+  }
+
+  .corr-seal__svg {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55));
+    transition: filter 200ms var(--ease-out-quart), transform 200ms var(--ease-out-quart);
+    will-change: transform, filter;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .corr-seal:hover {
+      transform: scale(1.05);
+    }
+
+    .corr-seal:hover .corr-seal__svg {
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55))
+        drop-shadow(0 0 14px oklch(0.76 0.092 85 / 0.3));
+    }
+
+    .corr-seal:hover .corr-seal__label {
+      color: var(--brass-hi);
+    }
+  }
+
+  .corr-seal:focus-visible {
+    outline: 2px solid var(--brass-hi);
+    outline-offset: 6px;
+    border-radius: var(--r-sm);
+  }
+
+  .corr-seal:active {
+    transform: scale(0.96);
+  }
+
+  .corr-seal__label {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--parchment-3);
+    text-align: center;
+    transition: color 200ms var(--ease-out-quart);
+  }
+
+  .seal-wax,
+  .seal-shard {
+    will-change: opacity, transform;
+  }
+
+  .corr-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--gutter);
+  }
+
+  .corr-backdrop {
+    position: absolute;
+    inset: 0;
+    background: oklch(0.06 0.008 240 / 0.88);
+    will-change: opacity;
+  }
+
+  .corr-parchment {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 34rem;
+    background: oklch(0.90 0.025 80);
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        oklch(0.85 0.02 80 / 0.15) 2px,
+        oklch(0.85 0.02 80 / 0.15) 4px
+      );
+    border-radius: 2px;
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.3),
+      0 12px 32px rgba(0, 0, 0, 0.5);
+    will-change: transform;
+    transform-origin: center center;
+    color: oklch(0.18 0.01 240);
+    font-family: var(--ff-body);
+  }
+
+  .corr-parchment__inner {
+    padding: var(--s-7) var(--s-6) var(--s-6);
+    position: relative;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .corr-parchment__inner::before {
+    content: '';
+    position: absolute;
+    inset: 1rem;
+    border: 1px solid oklch(0.60 0.04 80 / 0.3);
+    pointer-events: none;
+  }
+
+  .corr-plate-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    color: oklch(0.38 0.02 70);
+    margin-bottom: var(--s-1);
+  }
+
+  .corr-date-line {
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    color: oklch(0.38 0.02 70);
+    margin-bottom: var(--s-5);
+  }
+
+  .corr-title {
+    font-family: var(--ff-display);
+    font-size: var(--fs-h3);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: oklch(0.12 0.01 240);
+    margin-bottom: var(--s-5);
+    line-height: 1.2;
+  }
+
+  .corr-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+
+  .corr-body p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: oklch(0.22 0.01 240);
+    max-width: 52ch;
+    text-wrap: pretty;
+  }
+
+  .corr-stain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  .corr-stain--ash {
+    background:
+      radial-gradient(ellipse 30% 20% at 70% 60%, oklch(0.35 0.01 100 / 0.15), transparent 70%),
+      radial-gradient(circle 2px at 65% 58%, oklch(0.30 0.01 100 / 0.2), transparent),
+      radial-gradient(circle 1.5px at 72% 62%, oklch(0.30 0.01 100 / 0.18), transparent),
+      radial-gradient(circle 1px at 68% 55%, oklch(0.30 0.01 100 / 0.15), transparent);
+  }
+
+  .corr-stain--blood {
+    background:
+      radial-gradient(ellipse 50% 15% at 50% 95%, oklch(0.38 0.12 20 / 0.18), transparent 70%),
+      radial-gradient(ellipse 20% 10% at 30% 90%, oklch(0.35 0.14 22 / 0.12), transparent 60%);
+  }
+
+  .corr-stain--water {
+    background:
+      radial-gradient(ellipse 60% 8% at 40% 30%, oklch(0.82 0.02 85 / 0.2), transparent),
+      radial-gradient(ellipse 45% 6% at 65% 70%, oklch(0.82 0.02 85 / 0.18), transparent),
+      radial-gradient(ellipse 35% 5% at 20% 55%, oklch(0.82 0.02 85 / 0.15), transparent);
+  }
+
+  .corr-close {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+    z-index: 2;
+    transition: transform 160ms var(--ease-out-quart);
+    will-change: transform;
+  }
+
+  .corr-close:active {
+    transform: scale(0.92);
+  }
+
+  .corr-close:focus-visible {
+    outline: 2px solid var(--brass-hi);
+    outline-offset: 3px;
+  }
+
+  .corr-close__icon {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  }
+
+  @media (max-width: 880px) {
+    .corr-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--s-6);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .corr-grid {
+      grid-template-columns: 1fr;
+      max-width: 200px;
+      margin-inline: auto;
+    }
+
+    .corr-seal {
+      max-width: 140px;
+    }
+
+    .corr-parchment__inner {
+      padding: var(--s-5) var(--s-4);
+    }
+
+    .corr-close {
+      top: -0.6rem;
+      right: -0.6rem;
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+  }
+
+  .corr-pillar {
+    position: absolute;
+    top: -4rem;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+    width: auto;
+  }
+
+  .corr-pillar--left {
+    left: -5%;
+  }
+
+  .corr-pillar--right {
+    right: -5%;
+  }
+
+  .correspondence {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  @media (max-width: 1320px) {
+    .corr-pillar {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .corr-grid {
+      animation: none;
+    }
+
+    .corr-seal {
+      transition: none;
+    }
+
+    .corr-seal:hover {
+      transform: none;
+    }
+
+    .corr-seal__svg {
+      transition: none;
+    }
+
+    .corr-close {
+      transition: none;
+    }
+  }
+</style>

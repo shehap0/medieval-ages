@@ -1,0 +1,66 @@
+---
+import '~/styles/tokens.css';
+import '~/styles/typography.css';
+import '~/styles/page.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'The Citadel of Vael Anore — A Working Archive of Oaths, Tides, and Tallies',
+  description = 'The official archive of Vael Anore: chronicles, relic ledgers, oaths of the realm, and the working records of the inner circle. Established by warrant, kept by hand.'
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b0d12" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Marcellus&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Marcellus&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the archive</a>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: var(--z-tooltip);
+    background: var(--ink-plate);
+    color: var(--parchment);
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--brass);
+    border-radius: var(--r-sm);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-small);
+    letter-spacing: 0.08em;
+  }
+  .skip-link:focus { left: 1rem; top: 1rem; }
+</style>

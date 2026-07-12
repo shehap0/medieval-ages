@@ -1,0 +1,90 @@
+---
+const trades = [
+  {
+    no: '01',
+    name: 'Customs of the Upper Bay',
+    role: 'Tide & tariff',
+    by: 'The Tide Office',
+    sig: 'Open'
+  },
+  {
+    no: '02',
+    name: 'Royal Decrees & Writs',
+    role: 'Court record',
+    by: 'The Scribe\'s Office',
+    sig: 'Sealed'
+  },
+  {
+    no: '03',
+    name: 'Bounty Contracts',
+    role: 'Posted rewards',
+    by: 'The Inner Circle',
+    sig: 'Active'
+  },
+  {
+    no: '04',
+    name: 'Scryer\'s Visions',
+    role: 'Forecasts & readings',
+    by: 'The Tower Office',
+    sig: 'Filed'
+  },
+  {
+    no: '05',
+    name: 'Conquests & Annexations',
+    role: 'Annexation record',
+    by: 'The Marshal',
+    sig: 'Closed'
+  },
+  {
+    no: '06',
+    name: 'Armory Repairs',
+    role: 'Steel & harness',
+    by: 'The Smithy',
+    sig: 'Open'
+  }
+];
+---
+
+<section class="trades section" id="trades" aria-labelledby="trades-title">
+  <div class="container">
+    <header class="section__head">
+      <div>
+        <h2 id="trades-title" class="section__title">The guild trades.</h2>
+      </div>
+      <p class="section__lede">
+        The realm runs on <em>quiet labor</em> &middot; decrees copied clean, steel kept sharp, roads mapped, promises collected before sunset.
+      </p>
+    </header>
+
+    <div class="trades__head" aria-hidden="true">
+      <span>#</span>
+      <span>Trade</span>
+      <span>Office</span>
+      <span>Filing</span>
+      <span>Status</span>
+    </div>
+
+    <div role="list">
+      {trades.map((t) => (
+        <div class="trades__row" role="listitem">
+          <span class="trades__num">{t.no}</span>
+          <span class="trades__name">
+            {t.name}
+            <small>{t.role}</small>
+          </span>
+          <span class="trades__meta">{t.by}</span>
+          <span class="trades__meta">Quarterly</span>
+          <span class="trades__sig"><strong>{t.sig}</strong></span>
+        </div>
+      ))}
+    </div>
+
+    <div class="trades__total">
+      <span></span>
+      <span><strong>Six trades</strong> under warrant, MCDXIV</span>
+      <span></span>
+      <span></span>
+      <span>Open</span>
+    </div>
+  </div>
+</section>

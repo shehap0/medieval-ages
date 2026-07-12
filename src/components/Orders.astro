@@ -1,0 +1,64 @@
+---
+const orders = [
+  {
+    no: 'I',
+    name: 'The Iron Vow',
+    role: 'Sworn defenders',
+    body: 'For knights who hold the line when the banners fall and the only command left is duty. The oath is signed in their own blood, then again in ours.',
+    cta: 'Read the oath',
+    href: '#chronicles'
+  },
+  {
+    no: 'II',
+    name: 'The Ember Watch',
+    role: 'Beacon keepers',
+    body: 'Beacon keepers read smoke, weather, and fear before the enemy reaches the valley road. They retire at fifty. They are remembered by name.',
+    cta: 'Read the watch',
+    href: '#relics'
+  },
+  {
+    no: 'III',
+    name: 'The Scribe\'s Seal',
+    role: 'Court recorders',
+    body: 'Every pardon, levy, treaty, and secret sentence is weighed in ink before steel moves. The seal is the second signature, and the only one that travels.',
+    cta: 'Read the seal',
+    href: '#trades'
+  }
+];
+---
+
+<section class="orders section" id="orders" aria-labelledby="orders-title">
+  <div class="container">
+    <header class="section__head">
+      <div>
+        <h2 id="orders-title" class="section__title">
+          Three orders carry the realm.
+        </h2>
+      </div>
+      <p class="section__lede">
+        Not modern <em>features</em> &middot; sworn duties, hard rules, and crafts that keep the citadel breathing.
+      </p>
+    </header>
+
+    <div class="orders__list" role="list">
+      {orders.map((o, i) => (
+        <article class="order" role="listitem">
+          <div class="order__index">
+            <span>Order</span>
+            <strong>{o.no}</strong>
+          </div>
+          <div class="order__title">
+            <h3>{o.name}</h3>
+            <small>{o.role}</small>
+          </div>
+          <div class="order__body">
+            <p>{o.body}</p>
+          </div>
+          <div class="order__action">
+            <a href={o.href}>{o.cta}</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

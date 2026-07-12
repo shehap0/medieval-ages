@@ -1,0 +1,66 @@
+---
+export interface Props {
+  variant?: 'oath' | 'main';
+}
+const { variant = 'main' } = Astro.props;
+---
+<svg
+  class="site-footer__seal"
+  viewBox="0 0 100 100"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    <path
+      id="seal-arc-top"
+      d="M 50 50 m -36 0 a 36 36 0 1 1 72 0"
+    />
+    <path
+      id="seal-arc-bot"
+      d="M 50 50 m -36 0 a 36 36 0 1 0 72 0"
+    />
+  </defs>
+  <!-- outer ring -->
+  <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="1.2" />
+  <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="0.6" />
+  <circle cx="50" cy="50" r="34" stroke="currentColor" stroke-width="0.4" opacity="0.6" />
+
+  <!-- arched text -->
+  <text
+    fill="currentColor"
+    font-family="Marcellus, serif"
+    font-size="9"
+    letter-spacing="3"
+  >
+    <textPath href="#seal-arc-top" startOffset="50%" text-anchor="middle">
+      SIGILLVM ARCHIVA · VAEL ANORE
+    </textPath>
+  </text>
+  <text
+    fill="currentColor"
+    font-family="Marcellus, serif"
+    font-size="7"
+    letter-spacing="2"
+  >
+    <textPath href="#seal-arc-bot" startOffset="50%" text-anchor="middle">
+      · MCDXIV ·
+    </textPath>
+  </text>
+
+  <!-- central charge: a quarterly shield with bar and four pips -->
+  <g transform="translate(50 50)">
+    <path
+      d="M 0 -22 L 16 -18 V -2 C 16 8 9 14 0 18 C -9 14 -16 8 -16 -2 V -18 Z"
+      stroke="currentColor"
+      stroke-width="1.1"
+      fill="none"
+    />
+    <line x1="-16" y1="-2" x2="16" y2="-2" stroke="currentColor" stroke-width="1.1" />
+    <line x1="0" y1="-22" x2="0" y2="18" stroke="currentColor" stroke-width="1.1" />
+    <circle cx="-7" cy="-12" r="1.4" fill="currentColor" />
+    <circle cx="7" cy="-12" r="1.4" fill="currentColor" />
+    <circle cx="-7" cy="8" r="1.4" fill="currentColor" />
+    <circle cx="7" cy="8" r="1.4" fill="currentColor" />
+  </g>
+</svg>

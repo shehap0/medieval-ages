@@ -1,0 +1,74 @@
+---
+import BrandMark from './BrandMark.astro';
+
+const nav = [
+  { href: '#chronicles', label: 'Chronicles' },
+  { href: '#relics', label: 'Relic Vault' },
+  { href: '#orders', label: 'Orders' },
+  { href: '#correspondence', label: 'Correspondence' },
+  { href: '#trades', label: 'Guild Trades' }
+];
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="#top" aria-label="The Citadel of Vael Anore — home">
+      <BrandMark size={32} />
+      <span>
+        Vael Anore
+        <span class="brand__sub">Archive &middot; Established by warrant</span>
+      </span>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-controls="primary-nav"
+      aria-expanded="false"
+      data-nav-toggle
+    >
+      <span class="nav-toggle__label">Menu</span>
+      <span class="nav-toggle__mark" aria-hidden="true">
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-primary-nav>
+      <ul class="site-nav" role="list">
+        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <span class="header-stamp" aria-label="Archive status: open to the trade">
+      <span class="header-stamp__dot" aria-hidden="true"></span>
+      Roll open
+    </span>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector('[data-nav-toggle]');
+  const nav = document.querySelector('[data-primary-nav]');
+
+  if (toggle && nav) {
+    const close = () => {
+      toggle.setAttribute('aria-expanded', 'false');
+      document.documentElement.classList.remove('nav-open');
+    };
+
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      document.documentElement.classList.toggle('nav-open', !open);
+    });
+
+    nav.addEventListener('click', (event) => {
+      if (event.target instanceof HTMLAnchorElement) close();
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') close();
+    });
+  }
+</script>

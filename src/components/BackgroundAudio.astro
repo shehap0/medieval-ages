@@ -1,0 +1,130 @@
+<div class="bg-audio" id="bg-audio" aria-label="Background audio controls">
+  <button
+    class="bg-audio__btn"
+    id="bg-audio-btn"
+    type="button"
+    aria-label="Toggle background audio"
+    title="Toggle background audio"
+  >
+    <svg class="bg-audio__icon bg-audio__icon--unmuted" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+    </svg>
+    <svg class="bg-audio__icon bg-audio__icon--muted" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+    </svg>
+  </button>
+  <audio id="bg-audio-el" loop preload="auto" crossorigin="anonymous">
+    <source src="/Medieval%20Music%20%E2%80%93%20Cobblestone%20Village%20%5BjZ7a1yPaJh0%5D.mp3" type="audio/mpeg" />
+  </audio>
+</div>
+
+<script>
+  const btn = document.getElementById('bg-audio-btn') as HTMLButtonElement | null;
+  const audio = document.getElementById('bg-audio-el') as HTMLAudioElement | null;
+  const wrapper = document.getElementById('bg-audio');
+
+  if (btn && audio && wrapper) {
+    let userInteracted = false;
+    let muted = true;
+
+    function setMuted(m: boolean) {
+      muted = m;
+      audio!.muted = muted;
+      wrapper!.classList.toggle('bg-audio--muted', muted);
+      btn!.setAttribute('aria-label', muted ? 'Unmute background audio' : 'Mute background audio');
+      btn!.setAttribute('title', muted ? 'Unmute background audio' : 'Mute background audio');
+    }
+
+    function tryPlay() {
+      audio!.muted = muted;
+      audio!.play().catch(() => {});
+    }
+
+    btn.addEventListener('click', () => {
+      userInteracted = true;
+      setMuted(!muted);
+      if (!muted) {
+        tryPlay();
+      }
+    });
+
+    document.addEventListener(
+      'click',
+      () => {
+        if (!userInteracted) {
+          userInteracted = true;
+          tryPlay();
+          setMuted(false);
+        }
+      },
+      { once: true },
+    );
+
+    setMuted(true);
+    tryPlay();
+  }
+</script>
+
+<style>
+  .bg-audio {
+    position: fixed;
+    bottom: var(--s-5);
+    left: var(--s-5);
+    z-index: var(--z-sticky);
+  }
+
+  .bg-audio__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid oklch(0.55 0.075 78 / 0.4);
+    border-radius: 50%;
+    background: oklch(0.10 0.012 240 / 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--parchment-3);
+    cursor: pointer;
+    transition:
+      color var(--d-2) var(--ease-out-quart),
+      border-color var(--d-2) var(--ease-out-quart),
+      transform var(--d-2) var(--ease-out-quart);
+  }
+
+  .bg-audio__btn:hover {
+    color: var(--brass-hi);
+    border-color: var(--brass);
+    transform: scale(1.08);
+  }
+
+  .bg-audio__btn:active {
+    transform: scale(0.94);
+  }
+
+  .bg-audio__btn:focus-visible {
+    outline: 2px solid var(--brass-hi);
+    outline-offset: 3px;
+  }
+
+  .bg-audio__icon {
+    width: 1rem;
+    height: 1rem;
+    display: none;
+  }
+
+  .bg-audio--muted .bg-audio__icon--muted {
+    display: block;
+  }
+
+  .bg-audio:not(.bg-audio--muted) .bg-audio__icon--unmuted {
+    display: block;
+  }
+
+  @media (max-width: 720px) {
+    .bg-audio {
+      bottom: var(--s-4);
+      left: var(--s-4);
+    }
+  }
+</style>

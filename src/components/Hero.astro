@@ -1,0 +1,43 @@
+---
+// The hero is asymmetric. Text on the left, scene on the right.
+---
+
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="hero__grid">
+      <div class="hero__text">
+        <p class="eyebrow hero__eyebrow">A working archive &middot; MCDXIV</p>
+        <h1 id="hero-title" class="hero__title">
+          The records of <em>Vael Anore</em>, kept by hand.
+        </h1>
+        <p class="hero__lead">
+          A standing archive of the coastal citadel: tide tallies, oath ledgers,
+          relic witnesses, and the slow correspondence of the inner circle.
+          We do not transcribe by machine. We transcribe by <em>hand</em>,
+          on pressed vellum, and we sign every page.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="#chronicles">Read the chronicles</a>
+          <a class="btn btn--ghost" href="#orders">Inspect the orders</a>
+        </div>
+      </div>
+
+      <aside class="hero__aside" aria-label="Featured artifact">
+        <div class="hero__scene" data-realm-scene>
+          <img
+            class="hero__scene-fallback"
+            src="/images/map.jpg"
+            alt="A worn customs map mounted beneath brass registration marks"
+            loading="eager"
+            decoding="async"
+          />
+          <canvas id="realm-scene" aria-label="A brass astrolabe rotating above a wax-sealed letter"></canvas>
+        </div>
+        <p class="hero__caption">
+          Plate <strong>XXI</strong> &middot; Astrolabe reliquary, the sealed
+          customs letter of 1414
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+---
+import SealStamp from './SealStamp.astro';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__colophon">
+      <strong>The Citadel of Vael Anore</strong><br />
+      A working archive &middot; coastal reach<br />
+      Filed by hand &middot; signed at the close
+    </div>
+    <SealStamp />
+    <div class="site-footer__meta">
+      <a href="#top">Return to the seal</a> &middot;
+      <a href="mailto:archive@vael-anore.example">archive@vael-anore.example</a>
+      <br />
+      &copy; {year} The Archive &middot; printed in one edition
+      <br />
+      Made with love by Sir <a href="https://github.com/shehap0">shehap</a>
+    </div>
+  </div>
+</footer>
