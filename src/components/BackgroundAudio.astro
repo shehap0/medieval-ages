@@ -36,6 +36,7 @@
     }
 
     function tryPlay() {
+      audio!.volume = 0.2;
       audio!.muted = muted;
       audio!.play().catch(() => {});
     }

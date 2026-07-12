@@ -1,0 +1,300 @@
+---
+import { initWizardCat } from '../scripts/wizard-cat';
+---
+
+<div
+  id="wizard-cat"
+  class="wizard-cat"
+  role="button"
+  tabindex="0"
+  aria-label="Talk to the archivist's cat"
+>
+  <img
+    class="wizard-cat__sprite"
+    src="/cat/mini-wizard-cat-start.png"
+    alt=""
+    aria-hidden="true"
+    width="64"
+    height="64"
+  />
+</div>
+
+<audio id="wizard-typing-audio" src="/audio/8-bit-typing-effect.mp3" preload="auto" loop hidden></audio>
+
+<div
+  id="wizard-dialogue"
+  class="wizard-dialogue"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Archivist's Cat Dialogue"
+>
+  <div class="wizard-dialogue__backdrop"></div>
+
+  <div class="wizard-dialogue__scene">
+    <div class="wizard-dialogue__portrait">
+      <img
+        src="/cat/wizard-cat-portrait.png"
+        alt="The Archivist's Cat"
+        width="148"
+        height="148"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <div class="wizard-dialogue__bar">
+      <p class="wizard-dialogue__text"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { initWizardCat } from '../scripts/wizard-cat';
+  initWizardCat();
+</script>
+
+<style>
+  /* =======================================================================
+     Idle Cat Widget — fixed bottom-right, sprite-cycling companion
+     ======================================================================= */
+  .wizard-cat {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 250;
+    width: 176px;
+    height: 176px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-pill);
+    cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 0;
+    transition: transform 160ms var(--ease-out-quart);
+    transform-origin: bottom right;
+    will-change: transform;
+    image-rendering: pixelated;
+  }
+
+  .wizard-cat__sprite {
+    width: 160px;
+    height: 160px;
+    image-rendering: pixelated;
+    display: block;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55));
+    transition: filter 200ms var(--ease-out-quart);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .wizard-cat:hover {
+      transform: scale(1.12);
+    }
+
+    .wizard-cat:hover .wizard-cat__sprite {
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55))
+        drop-shadow(0 0 14px oklch(0.76 0.092 85 / 0.35));
+    }
+  }
+
+  .wizard-cat:active {
+    transform: scale(0.94);
+  }
+
+  .wizard-cat:focus-visible {
+    outline: 2px solid var(--brass-hi);
+    outline-offset: 4px;
+  }
+
+  /* =======================================================================
+     Dialogue Overlay — Stardew-inspired, restyled for the Citadel
+     ======================================================================= */
+  .wizard-dialogue {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: none;
+    pointer-events: none;
+  }
+
+  .wizard-dialogue__backdrop {
+    position: absolute;
+    inset: 0;
+    background: oklch(0.06 0.008 240 / 0.78);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    cursor: pointer;
+    will-change: opacity;
+  }
+
+  .wizard-dialogue__scene {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 1.5rem 1.5rem;
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 1.5rem));
+  }
+
+  /* -------- Cat portrait (above-right, peeking over the bar) -------- */
+  .wizard-dialogue__portrait {
+    position: absolute;
+    right: 2rem;
+    bottom: 100%;
+    margin-bottom: 6px;
+    z-index: 2;
+    pointer-events: none;
+    width: 340px;
+    will-change: transform, opacity;
+  }
+
+  .wizard-dialogue__portrait img {
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+    display: block;
+  }
+
+  /* -------- Text bar (full-width, parchment/dark-panel chrome) -------- */
+  .wizard-dialogue__bar {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 14rem;
+    padding: 3rem 5rem 3rem 4rem;
+    background:
+      linear-gradient(
+        180deg,
+        oklch(0.15 0.016 240 / 0.95) 0%,
+        oklch(0.12 0.012 240 / 0.97) 100%
+      );
+    background-color: var(--ink-stone);
+    border: 1px solid oklch(0.55 0.075 78 / 0.32);
+    border-radius: var(--r-sm);
+    box-shadow:
+      var(--shadow-soft),
+      inset 0 1px 0 oklch(0.30 0.022 240 / 0.35);
+    cursor: pointer;
+    will-change: transform, opacity;
+  }
+
+  /* subtle parchment grain overlay */
+  .wizard-dialogue__bar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        oklch(0.85 0.02 80 / 0.03) 2px,
+        oklch(0.85 0.02 80 / 0.03) 4px
+      );
+  }
+
+  /* subtle inner border / inset rule */
+  .wizard-dialogue__bar::after {
+    content: '';
+    position: absolute;
+    inset: 0.5rem;
+    border: 1px solid oklch(0.55 0.075 78 / 0.15);
+    border-radius: 1px;
+    pointer-events: none;
+  }
+
+  /* -------- Dialogue text -------- */
+  .wizard-dialogue__text {
+    position: relative;
+    z-index: 1;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 2.3rem;
+    line-height: 1.7;
+    color: var(--parchment);
+    max-width: none;
+    margin: 0;
+    min-height: 2.55em;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* =======================================================================
+     Responsive
+     ======================================================================= */
+  @media (max-width: 700px) {
+    .wizard-cat {
+      bottom: 1rem;
+      right: 1rem;
+      width: 132px;
+      height: 132px;
+    }
+
+    .wizard-cat__sprite {
+      width: 120px;
+      height: 120px;
+    }
+
+    .wizard-dialogue__scene {
+      padding: 0 0.75rem 0.75rem;
+      padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0.75rem));
+    }
+
+    .wizard-dialogue__portrait {
+      width: 220px;
+      right: 1rem;
+    }
+
+    .wizard-dialogue__bar {
+      padding: 2rem 2.5rem;
+      min-height: 10rem;
+    }
+
+    .wizard-dialogue__text {
+      font-size: 1.6rem;
+      line-height: 1.6;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .wizard-dialogue__portrait {
+      width: 140px;
+      right: 0.75rem;
+      margin-bottom: 4px;
+    }
+
+    .wizard-dialogue__bar {
+      padding: 1.25rem 1.25rem;
+      min-height: 7rem;
+    }
+
+    .wizard-dialogue__text {
+      font-size: 1.1rem;
+    }
+  }
+
+  /* =======================================================================
+     Reduced motion
+     ======================================================================= */
+  @media (prefers-reduced-motion: reduce) {
+    .wizard-cat {
+      transition: none;
+    }
+
+    .wizard-cat:hover {
+      transform: none;
+    }
+
+    .wizard-cat__sprite {
+      transition: none;
+    }
+
+    .wizard-dialogue__backdrop,
+    .wizard-dialogue__bar,
+    .wizard-dialogue__portrait {
+      transition: none !important;
+    }
+  }
+</style>
